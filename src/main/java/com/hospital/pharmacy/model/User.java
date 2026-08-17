@@ -60,7 +60,7 @@ public class User {
     // Only validate on create
     @NotBlank(groups = CreateValidation.class)
     @Column(nullable = false)
-    private String role; // ADMIN, DOCTOR, PHARMACIST, RECEPTIONIST
+    private String role = "USER"; // ADMIN, DOCTOR, PHARMACIST, RECEPTIONIST
 
     private String phoneNumber;
 

@@ -31,6 +31,7 @@ public class DataInitializationService {
         admin.setLastName("User");
         admin.setEmail("admin@hospital.com");
         admin.setPassword("admin123");
+        admin.setRole("ADMIN");
         admin.setPhoneNumber("1234567890");
         admin.setAddress("123 Admin St, Hospital City");
         admin.setGender("Male");
