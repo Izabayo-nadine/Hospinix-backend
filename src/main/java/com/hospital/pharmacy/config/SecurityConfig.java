@@ -6,6 +6,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -23,6 +24,12 @@ import com.hospital.pharmacy.filter.JwtRequestFilter;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
+
+        @Value("${spring.mail.username:}")
+        private String mailUsername;
+
+        @Value("${spring.mail.password:}")
+        private String mailPassword;
 
         @Bean
         public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtRequestFilter jwtRequestFilter)
@@ -68,8 +75,8 @@ public class SecurityConfig {
                 JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
                 mailSender.setHost("smtp.gmail.com");
                 mailSender.setPort(587);
-                mailSender.setUsername("izabayonadine08@gmail.com");
-                mailSender.setPassword("fvxm mixt bqpy dgfv");
+                mailSender.setUsername(mailUsername);
+                mailSender.setPassword(mailPassword);
 
                 Properties props = mailSender.getJavaMailProperties();
                 props.put("mail.smtp.auth", "true");
@@ -82,7 +89,8 @@ public class SecurityConfig {
         @Bean
         public CorsConfigurationSource corsConfigurationSource() {
                 CorsConfiguration configuration = new CorsConfiguration();
-                configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://127.0.0.1:3000","https://hospinix-teal.vercel.app"));
+                configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://127.0.0.1:3000",
+                                "https://hospinix-teal.vercel.app"));
                 configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                 configuration.setAllowedHeaders(Arrays.asList("*"));
                 configuration.setAllowedHeaders(Arrays.asList("*"));
