@@ -2,6 +2,7 @@ package com.hospital.pharmacy.config;
 
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -10,6 +11,7 @@ import org.springframework.core.env.Environment;
 import javax.sql.DataSource;
 
 @Configuration
+@ConditionalOnProperty(name = "spring.flyway.enabled", havingValue = "true")
 public class FlywayConfig {
 
     @Autowired
